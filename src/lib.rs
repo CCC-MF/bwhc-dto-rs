@@ -32,6 +32,7 @@ impl FromStr for MtbFile {
     ///
     /// ```
     /// use bwhc_dto::MtbFile;
+    /// use std::str::FromStr;
     ///
     /// fn main() {
     ///     const MTBFILE_JSON: &str = include_str!("../tests/fake_MTBFile.json");
