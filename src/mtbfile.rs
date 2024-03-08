@@ -1,88 +1,115 @@
 use serde::{Serialize, Deserialize};
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MtbFile {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub care_plans: Option<Vec<CarePlan>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub claim_responses: Option<Vec<ClaimResponse>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub claims: Option<Vec<Claim>>,
 
     pub consent: Consent,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub diagnoses: Option<Vec<Diagnosis>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ecog_status: Option<Vec<EcogStatus>>,
 
     pub episode: Episode,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub family_member_diagnoses: Option<Vec<FamilyMemberDiagnosis>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub genetic_counselling_requests: Option<Vec<GeneticCounsellingRequest>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub histology_reevaluation_requests: Option<Vec<HistologyReevaluationRequest>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub histology_reports: Option<Vec<HistologyReport>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub last_guideline_therapies: Option<Vec<LastGuidelineTherapy>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub molecular_pathology_findings: Option<Vec<MolecularPathologyFinding>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub molecular_therapies: Option<Vec<MolecularTherapy>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ngs_reports: Option<Vec<NgsReport>>,
 
     pub patient: Patient,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub previous_guideline_therapies: Option<Vec<PreviousGuidelineTherapy>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub rebiopsy_requests: Option<Vec<RebiopsyRequest>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub recommendations: Option<Vec<Recommendation>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub responses: Option<Vec<Response>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub specimens: Option<Vec<Specimen>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub study_inclusion_requests: Option<Vec<StudyInclusionRequest>>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CarePlan {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub description: Option<String>,
 
     pub diagnosis: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub genetic_counselling_request: Option<String>,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub no_target_finding: Option<NoTargetFinding>,
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub rebiopsy_requests: Option<Vec<String>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub recommendations: Option<Vec<String>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub study_inclusion_requests: Option<Vec<String>>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NoTargetFinding {
     pub diagnosis: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
     pub patient: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ClaimResponse {
     pub claim: String,
@@ -93,12 +120,13 @@ pub struct ClaimResponse {
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reason: Option<Reason>,
 
     pub status: ClaimResponseStatus,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum Reason {
     #[serde(rename = "insufficient-evidence")]
@@ -110,7 +138,7 @@ pub enum Reason {
     StandardTherapyNotExhausted,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum ClaimResponseStatus {
     Accepted,
@@ -118,7 +146,7 @@ pub enum ClaimResponseStatus {
     Rejected,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Claim {
     pub id: String,
@@ -130,7 +158,7 @@ pub struct Claim {
     pub therapy: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Consent {
     pub id: String,
 
@@ -139,7 +167,7 @@ pub struct Consent {
     pub status: ConsentStatus,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum ConsentStatus {
     Active,
@@ -147,29 +175,36 @@ pub enum ConsentStatus {
     Rejected,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Diagnosis {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub guideline_treatment_status: Option<GuidelineTreatmentStatus>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub histology_results: Option<Vec<String>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub icd10: Option<DiagnosisIcd10>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub icd_o3_t: Option<IcdO3T>,
 
     pub id: String,
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub recorded_on: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub status_history: Option<Vec<StatusHistory>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub who_grade: Option<WhoGrade>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum GuidelineTreatmentStatus {
     Exhausted,
@@ -185,32 +220,36 @@ pub enum GuidelineTreatmentStatus {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DiagnosisIcd10 {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct IcdO3T {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct StatusHistory {
     pub date: String,
 
     pub status: DiagnosisStatus,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum DiagnosisStatus {
     Local,
@@ -223,16 +262,18 @@ pub enum DiagnosisStatus {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct WhoGrade {
     pub code: CodeEnum,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum CodeEnum {
     I,
 
@@ -246,9 +287,10 @@ pub enum CodeEnum {
     Iv,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct EcogStatus {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub effective_date: Option<String>,
 
     pub id: String,
@@ -258,16 +300,18 @@ pub struct EcogStatus {
     pub value: EcogStatusValue,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct EcogStatusValue {
     pub code: Ecog,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Ecog {
     #[serde(rename = "0")]
     The0,
@@ -285,7 +329,7 @@ pub enum Ecog {
     The4,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Episode {
     pub id: String,
 
@@ -294,14 +338,15 @@ pub struct Episode {
     pub period: EpisodePeriod,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct EpisodePeriod {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub end: Option<String>,
 
     pub start: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct FamilyMemberDiagnosis {
     pub id: String,
 
@@ -310,16 +355,18 @@ pub struct FamilyMemberDiagnosis {
     pub relationship: Relationship,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Relationship {
     pub code: RelationshipCode,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum RelationshipCode {
     #[serde(rename = "EXT")]
     Ext,
@@ -328,11 +375,12 @@ pub enum RelationshipCode {
     Fammemb,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GeneticCounsellingRequest {
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
     pub patient: String,
@@ -340,11 +388,12 @@ pub struct GeneticCounsellingRequest {
     pub reason: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HistologyReevaluationRequest {
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
     pub patient: String,
@@ -352,23 +401,26 @@ pub struct HistologyReevaluationRequest {
     pub specimen: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct HistologyReport {
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
     pub patient: String,
 
     pub specimen: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tumor_cell_content: Option<HistologyReportTumorCellContent>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tumor_morphology: Option<TumorMorphology>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct HistologyReportTumorCellContent {
     pub id: String,
 
@@ -379,7 +431,7 @@ pub struct HistologyReportTumorCellContent {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum TumorCellContentMethod {
     Bioinformatic,
@@ -387,10 +439,11 @@ pub enum TumorCellContentMethod {
     Histologic,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct TumorMorphology {
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub note: Option<String>,
 
     pub patient: String,
@@ -400,45 +453,53 @@ pub struct TumorMorphology {
     pub value: TumorMorphologyValue,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct TumorMorphologyValue {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct LastGuidelineTherapy {
     pub diagnosis: String,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub medication: Option<Vec<LastGuidelineTherapyMedication>>,
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub period: Option<LastGuidelineTherapyPeriod>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reason_stopped: Option<LastGuidelineTherapyReasonStopped>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub therapy_line: Option<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LastGuidelineTherapyMedication {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
     pub system: System,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum System {
     #[serde(rename = "ATC")]
     Atc,
@@ -446,23 +507,26 @@ pub enum System {
     Unregistered,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LastGuidelineTherapyPeriod {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub end: Option<String>,
 
     pub start: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LastGuidelineTherapyReasonStopped {
     pub code: GuidelineTherapyStopReason,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum GuidelineTherapyStopReason {
     #[serde(rename = "chronic-remission")]
@@ -482,81 +546,93 @@ pub enum GuidelineTherapyStopReason {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct MolecularPathologyFinding {
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
     pub note: String,
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub performing_institute: Option<String>,
 
     pub specimen: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct MolecularTherapy {
     pub history: Vec<History>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct History {
     pub based_on: String,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub not_done_reason: Option<NotDoneReason>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub note: Option<String>,
 
     pub patient: String,
 
     pub recorded_on: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub dosage: Option<Dosage>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub medication: Option<Vec<HistoryMedication>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub period: Option<HistoryPeriod>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reason_stopped: Option<HistoryReasonStopped>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Dosage {
     #[serde(rename = ">=50%")]
-    GreaterOrEqual50,
+    Dosage50,
 
     #[serde(rename = "<50%")]
-    Less50,
+    The50,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct HistoryMedication {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
     pub system: System,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct NotDoneReason {
     pub code: NotDoneReasonCode,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum NotDoneReasonCode {
     #[serde(rename = "continued-externally")]
@@ -591,23 +667,26 @@ pub enum NotDoneReasonCode {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct HistoryPeriod {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub end: Option<String>,
 
     pub start: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct HistoryReasonStopped {
     pub code: MolekularTherapyStopReason,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum MolekularTherapyStopReason {
     #[serde(rename = "continued-externally")]
@@ -641,13 +720,16 @@ pub enum MolekularTherapyStopReason {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct NgsReport {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub brcaness: Option<f64>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub copy_number_variants: Option<Vec<CopyNumberVariant>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub dna_fusions: Option<Vec<DnaFusion>>,
 
     pub id: String,
@@ -656,67 +738,84 @@ pub struct NgsReport {
 
     pub metadata: Vec<Metadatum>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub msi: Option<f64>,
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub rna_fusions: Option<Vec<RnaFusion>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub rna_seqs: Option<Vec<RnaSeq>>,
 
     pub sequencing_type: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub simple_variants: Option<Vec<SimpleVariant>>,
 
     pub specimen: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tmb: Option<f64>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub tumor_cell_content: Option<NgsReportTumorCellContent>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CopyNumberVariant {
     pub chromosome: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub cn_a: Option<f64>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub cn_b: Option<f64>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub copy_number_neutral_lo_h: Option<Vec<CopyNumberNeutralLoH>>,
 
     pub end_range: EndRange,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub relative_copy_number: Option<f64>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reported_affected_genes: Option<Vec<ReportedAffectedGene>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reported_focality: Option<String>,
 
     pub start_range: StartRange,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub total_copy_number: Option<i64>,
 
     #[serde(rename = "type")]
     pub copy_number_variant_type: CnvType,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct CopyNumberNeutralLoH {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum CnvType {
     #[serde(rename = "high-level-gain")]
@@ -728,47 +827,56 @@ pub enum CnvType {
     LowLevelGain,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct EndRange {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub end: Option<f64>,
 
     pub start: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct ReportedAffectedGene {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct StartRange {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub end: Option<f64>,
 
     pub start: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct DnaFusion {
     #[serde(rename = "fusionPartner3prime")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub fusion_partner3_prime: Option<DnaFusionFusionPartner3Prime>,
 
     #[serde(rename = "fusionPartner5prime")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub fusion_partner5_prime: Option<DnaFusionFusionPartner5Prime>,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reported_num_reads: Option<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DnaFusionFusionPartner3Prime {
     pub chromosome: String,
 
@@ -777,19 +885,23 @@ pub struct DnaFusionFusionPartner3Prime {
     pub position: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PurpleGene {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DnaFusionFusionPartner5Prime {
     pub chromosome: String,
 
@@ -798,25 +910,30 @@ pub struct DnaFusionFusionPartner5Prime {
     pub position: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct FluffyGene {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Metadatum {
     pub kit_manufacturer: String,
 
     pub kit_type: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub pipeline: Option<String>,
 
     pub reference_genome: String,
@@ -824,25 +941,30 @@ pub struct Metadatum {
     pub sequencer: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RnaFusion {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub cosmic_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub effect: Option<String>,
 
     #[serde(rename = "fusionPartner3prime")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub fusion_partner3_prime: Option<RnaFusionFusionPartner3Prime>,
 
     #[serde(rename = "fusionPartner5prime")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub fusion_partner5_prime: Option<RnaFusionFusionPartner5Prime>,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub reported_num_reads: Option<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RnaFusionFusionPartner3Prime {
     pub exon: String,
@@ -856,19 +978,23 @@ pub struct RnaFusionFusionPartner3Prime {
     pub transcript_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct TentacledGene {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Strand {
     #[serde(rename = "+")]
     Empty,
@@ -877,7 +1003,7 @@ pub enum Strand {
     Strand,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RnaFusionFusionPartner5Prime {
     pub exon: String,
@@ -891,21 +1017,26 @@ pub struct RnaFusionFusionPartner5Prime {
     pub transcript_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StickyGene {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RnaSeq {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub cohort_ranking: Option<i64>,
 
     pub ensembl_id: String,
@@ -930,36 +1061,45 @@ pub struct RnaSeq {
     pub transcript_id: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RnaSeqGene {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SimpleVariant {
     pub allelic_frequency: f64,
 
     pub alt_allele: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub amino_acid_change: Option<AminoAcidChange>,
 
     pub chromosome: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub cosmic_id: Option<String>,
 
     #[serde(rename = "dbSNPId")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub db_snp_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub dna_change: Option<DnaChange>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub gene: Option<SimpleVariantGene>,
 
     pub id: String,
@@ -973,53 +1113,64 @@ pub struct SimpleVariant {
     pub start_end: StartEnd,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct AminoAcidChange {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct DnaChange {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct SimpleVariantGene {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ensembl_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub hgnc_id: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub name: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub symbol: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Interpretation {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct StartEnd {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub end: Option<f64>,
 
     pub start: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct NgsReportTumorCellContent {
     pub id: String,
 
@@ -1030,24 +1181,28 @@ pub struct NgsReportTumorCellContent {
     pub value: f64,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Patient {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub birth_date: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub date_of_death: Option<String>,
 
     pub gender: Gender,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub insurance: Option<String>,
 
     #[serde(rename = "managingZPM")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub managing_zpm: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "snake_case")]
 pub enum Gender {
     Female,
@@ -1059,36 +1214,41 @@ pub enum Gender {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PreviousGuidelineTherapy {
     pub diagnosis: String,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub medication: Option<Vec<PreviousGuidelineTherapyMedication>>,
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub therapy_line: Option<i64>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct PreviousGuidelineTherapyMedication {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
     pub system: System,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct RebiopsyRequest {
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
     pub patient: String,
@@ -1096,45 +1256,54 @@ pub struct RebiopsyRequest {
     pub specimen: String,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Recommendation {
     pub diagnosis: String,
 
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub level_of_evidence: Option<LevelOfEvidence>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub medication: Option<Vec<RecommendationMedication>>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub ngs_report: Option<String>,
 
     pub patient: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub priority: Option<Priority>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub supporting_variants: Option<Vec<String>>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct LevelOfEvidence {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub addendums: Option<Vec<Addendum>>,
 
     pub grading: Grading,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Addendum {
     pub code: AddendumCode,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum AddendumCode {
     #[serde(rename = "is")]
     Is,
@@ -1147,16 +1316,18 @@ pub enum AddendumCode {
     Z,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Grading {
     pub code: GradingCode,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub enum GradingCode {
     #[serde(rename = "m1A")]
@@ -1182,18 +1353,20 @@ pub enum GradingCode {
     M4,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct RecommendationMedication {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
     pub system: System,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Priority {
     #[serde(rename = "1")]
     The1,
@@ -1208,7 +1381,7 @@ pub enum Priority {
     The4,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct Response {
     pub effective_date: String,
@@ -1222,16 +1395,18 @@ pub struct Response {
     pub value: ResponseValue,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct ResponseValue {
     pub code: Recist,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub enum Recist {
     #[serde(rename = "CR")]
     Cr,
@@ -1255,8 +1430,9 @@ pub enum Recist {
     Sd,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Specimen {
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub collection: Option<Collection>,
 
     pub icd10: SpecimenIcd10,
@@ -1266,10 +1442,11 @@ pub struct Specimen {
     pub patient: String,
 
     #[serde(rename = "type")]
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub specimen_type: Option<SpecimenType>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Collection {
     pub date: String,
 
@@ -1278,7 +1455,7 @@ pub struct Collection {
     pub method: CollectionMethod,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum Localization {
     Metastasis,
@@ -1289,7 +1466,7 @@ pub enum Localization {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum CollectionMethod {
     Biopsy,
@@ -1304,16 +1481,18 @@ pub enum CollectionMethod {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 pub struct SpecimenIcd10 {
     pub code: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub display: Option<String>,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub version: Option<String>,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "kebab-case")]
 pub enum SpecimenType {
     #[serde(rename = "cryo-frozen")]
@@ -1331,11 +1510,12 @@ pub enum SpecimenType {
     Unknown,
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct StudyInclusionRequest {
     pub id: String,
 
+    #[serde(skip_serializing_if = "Option::is_none")]
     pub issued_on: Option<String>,
 
     pub nct_number: String,
