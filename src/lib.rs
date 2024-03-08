@@ -5,7 +5,7 @@
     clippy::needless_doctest_main,
 )]
 
-pub use crate::mtbfile::MtbFile;
+pub use crate::mtbfile::*;
 use std::error::Error;
 use std::fmt::{Debug, Display, Formatter};
 use std::str::FromStr;
@@ -47,6 +47,54 @@ impl FromStr for MtbFile {
     /// If the conversion fails, an `SerdeError` will be returned.
     fn from_str(value: &str) -> Result<MtbFile, SerdeError> {
         serde_json::from_str(value).map_err(|err| SerdeError(err.to_string()))
+    }
+}
+
+impl MtbFile {
+    
+    /// Creates "dummy" MtbFile with consent status `REJECTED`.
+    /// The created MtbFile does not contain all information, just enough to contain the
+    /// information, that the patient with given ID has rejected the consent.
+    pub fn new_with_consent_rejected(patient_id: &str) -> MtbFile {
+        MtbFile {
+            care_plans: None,
+            claim_responses: None,
+            claims: None,
+            consent: Consent {
+                id: "".to_string(),
+                patient: patient_id.to_string(),
+                status: ConsentStatus::Rejected,
+            },
+            diagnoses: None,
+            ecog_status: None,
+            episode: Episode {
+                id: "".to_string(),
+                patient: patient_id.to_string(),
+                period: EpisodePeriod { end: None, start: "".to_string() },
+            },
+            family_member_diagnoses: None,
+            genetic_counselling_requests: None,
+            histology_reevaluation_requests: None,
+            histology_reports: None,
+            last_guideline_therapies: None,
+            molecular_pathology_findings: None,
+            molecular_therapies: None,
+            ngs_reports: None,
+            patient: Patient {
+                birth_date: None,
+                date_of_death: None,
+                gender: Gender::Unknown,
+                id: patient_id.to_string(),
+                insurance: None,
+                managing_zpm: None,
+            },
+            previous_guideline_therapies: None,
+            rebiopsy_requests: None,
+            recommendations: None,
+            responses: None,
+            specimens: None,
+            study_inclusion_requests: None,
+        }
     }
 }
 
