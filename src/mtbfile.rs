@@ -1,4 +1,4 @@
-use serde::{Serialize, Deserialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -586,6 +586,8 @@ pub struct History {
 
     pub recorded_on: String,
 
+    pub status: MolecularTherapyStatus,
+
     #[serde(skip_serializing_if = "Option::is_none")]
     pub dosage: Option<Dosage>,
 
@@ -718,6 +720,20 @@ pub enum MolekularTherapyStopReason {
     Toxicity,
 
     Unknown,
+}
+
+#[derive(Debug, Serialize, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum MolecularTherapyStatus {
+    Completed,
+
+    #[serde(rename = "not-done")]
+    NotDone,
+
+    #[serde(rename = "on-going")]
+    OnGoing,
+
+    Stopped,
 }
 
 #[derive(Debug, Serialize, Deserialize)]
