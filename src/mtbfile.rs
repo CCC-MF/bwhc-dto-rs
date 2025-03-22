@@ -285,6 +285,18 @@ pub enum CodeEnum {
 
     #[serde(rename = "IV")]
     Iv,
+
+    #[serde(rename = "1")]
+    Code1,
+
+    #[serde(rename = "2")]
+    Code2,
+
+    #[serde(rename = "3")]
+    Code3,
+
+    #[serde(rename = "4")]
+    Code4,
 }
 
 #[derive(Debug, Serialize, Deserialize)]

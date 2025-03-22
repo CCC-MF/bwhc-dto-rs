@@ -1,9 +1,7 @@
 //! This crate provides structs to serialize and deserialize bwHC DTOs.
 //! The base struct is `MtbFile`.
 
-#![allow(
-    clippy::needless_doctest_main,
-)]
+#![allow(clippy::needless_doctest_main)]
 
 pub use crate::mtbfile::*;
 use std::error::Error;
@@ -51,7 +49,6 @@ impl FromStr for MtbFile {
 }
 
 impl MtbFile {
-    
     /// Creates "dummy" MtbFile with consent status `REJECTED`.
     /// The created MtbFile does not contain all information, just enough to contain the
     /// information, that the patient with given ID has rejected the consent.
@@ -70,7 +67,10 @@ impl MtbFile {
             episode: Episode {
                 id: "".to_string(),
                 patient: patient_id.to_string(),
-                period: EpisodePeriod { end: None, start: "".to_string() },
+                period: EpisodePeriod {
+                    end: None,
+                    start: "".to_string(),
+                },
             },
             family_member_diagnoses: None,
             genetic_counselling_requests: None,
